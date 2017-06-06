@@ -12,7 +12,7 @@ public class NeighbourCounterTest {
     private ArrayList<ArrayList<String>> test2dArrayList;
     private final String ALIVE_STR = "*";
     private final String DEAD_STR = ".";
-    
+
     @Test
     public void countNoNeighboursTest() {
         //given
