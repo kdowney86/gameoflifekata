@@ -51,4 +51,23 @@ public class NeighbourCounterTest {
         Assert.assertEquals(expected, result);
     }
 
+    @Test
+    public void countOneNeighbourToTheEastTest() {
+        //given
+        test2dArrayList = new ArrayList<>();
+        test2dArrayList.add(0, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(1, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(2, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
+        test2dArrayList.add(3, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+
+        int expected = 1;
+
+        //when
+        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+
+        //then
+        Assert.assertEquals(expected, result);
+    }
+
 }
