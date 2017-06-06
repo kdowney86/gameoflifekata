@@ -6,6 +6,6 @@ import java.util.ArrayList;
 public class NeighbourCounter {
 
     public static int count(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
-        return -1;
+        return 0;
     }
 }
