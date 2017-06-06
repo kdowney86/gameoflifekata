@@ -6,6 +6,13 @@ import java.util.ArrayList;
 public class GameOfLife {
 
     public static ArrayList<ArrayList<String>> process(ArrayList<ArrayList<String>> list) {
-        return null;
+
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.get(i).size(); j++) {
+                list.get(i).set(j, ".");
+            }
+        }
+
+        return list;
     }
 }
