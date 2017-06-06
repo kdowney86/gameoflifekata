@@ -1,6 +1,4 @@
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,14 +16,12 @@ public class GameOfLifeTests {
         4. Any dead cell with exactly three live neighbours becomes a live cell.
      */
 
-    private GameOfLife gol;
     private ArrayList<ArrayList<String>> test2dArrayList;
     private final String ALIVE_STR = "*";
     private final String DEAD_STR = ".";
 
     @Test
     public void testAnyLiveCellWithFewerThanTwoLiveNeighboursDies() {
-        gol = new GameOfLife();
         test2dArrayList = new ArrayList<>();
         test2dArrayList.add(0, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(1, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
