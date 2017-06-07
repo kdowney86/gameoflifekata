@@ -71,8 +71,8 @@ public class NeighbourCounter {
     private static boolean checkIsInBounds(ArrayList<ArrayList<String>> list, int xPos, int yPos, int xDiff, int yDiff) {
         boolean result = true;
 
-        if (list.size() - xDiff < 0) result = false;
-        if (list.get(0).size() - yDiff < 0) result = false;
+        if (xPos + xDiff < 0) result = false;
+        if (yPos + yDiff < 0) result = false;
         if (xPos + xDiff > list.size() - 1) result = false;
         if (yPos + yDiff > list.get(0).size() -1) result = false;
 
