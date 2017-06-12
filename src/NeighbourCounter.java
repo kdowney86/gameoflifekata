@@ -12,6 +12,11 @@ public class NeighbourCounter {
         result += getNeighboursToTheNorth(list, xPos, yPos);
         result += getNeighboursToTheEast(list, xPos, yPos);
         result += getNeighboursToTheSouth(list, xPos, yPos);
+        result += getNeighboursToTheNorthWest(list, xPos, yPos);
+        result += getNeighboursToTheNorthEast(list, xPos, yPos);
+        result += getNeighboursToTheSouthWest(list, xPos, yPos);
+        result += getNeighboursToTheSouthEast(list, xPos, yPos);
+
 
         return result;
     }
@@ -27,9 +32,31 @@ public class NeighbourCounter {
         return result;
     }
 
+    private static int getNeighboursToTheNorthWest(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
+        int result = 0;
+        int xDiff = -1;
+        int yDiff = -1;
+
+        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
+            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
+        }
+        return result;
+    }
+
     private static int getNeighboursToTheNorth(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 0;
+        int yDiff = -1;
+
+        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
+            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
+        }
+        return result;
+    }
+
+    private static int getNeighboursToTheNorthEast(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
+        int result = 0;
+        int xDiff = 1;
         int yDiff = -1;
 
         if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
@@ -49,9 +76,31 @@ public class NeighbourCounter {
         return result;
     }
 
+    private static int getNeighboursToTheSouthWest(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
+        int result = 0;
+        int xDiff = -1;
+        int yDiff = 1;
+
+        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
+            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
+        }
+        return result;
+    }
+
     private static int getNeighboursToTheSouth(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 0;
+        int yDiff = 1;
+
+        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
+            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
+        }
+        return result;
+    }
+
+    private static int getNeighboursToTheSouthEast(ArrayList<ArrayList<String>> list, int xPos, int yPos) {
+        int result = 0;
+        int xDiff = 1;
         int yDiff = 1;
 
         if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
