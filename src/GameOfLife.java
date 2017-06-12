@@ -20,6 +20,8 @@ public class GameOfLife {
             for (int j = 0; j < tempList.get(i).size(); j++) {
                 if (NeighbourCounter.count(originalList, i, j) < 2)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
+                if (NeighbourCounter.count(originalList, i, j) > 3)
+                    tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
             }
         }
     }
