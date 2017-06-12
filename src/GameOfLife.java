@@ -11,7 +11,6 @@ public class GameOfLife {
         fillEmptyCells(resultList, list);
         processCells(resultList, list);
 
-
         return resultList;
     }
 
@@ -20,8 +19,10 @@ public class GameOfLife {
             for (int j = 0; j < tempList.get(i).size(); j++) {
                 if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) < 2)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
-                if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
+                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
+                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2)
+                    tempList.get(i).set(j, GameOfLifeConstants.ALIVE_STR);
             }
         }
     }
