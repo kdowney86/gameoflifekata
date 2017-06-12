@@ -9,18 +9,18 @@ public class GameOfLife {
 
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
         fillEmptyCells(resultList, list);
-        processCellsWithFewerThanTwoNeighbours(resultList, list);
+        processCells(resultList, list);
 
 
         return resultList;
     }
 
-    private static void processCellsWithFewerThanTwoNeighbours(ArrayList<ArrayList<String>> tempList, ArrayList<ArrayList<String>> originalList) {
+    private static void processCells(ArrayList<ArrayList<String>> tempList, ArrayList<ArrayList<String>> originalList) {
         for (int i = 0; i < tempList.size(); i++) {
             for (int j = 0; j < tempList.get(i).size(); j++) {
-                if (NeighbourCounter.count(originalList, i, j) < 2)
+                if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) < 2)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
-                if (NeighbourCounter.count(originalList, i, j) > 3)
+                if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
             }
         }
