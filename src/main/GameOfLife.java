@@ -2,15 +2,20 @@ package main;
 
 import java.util.ArrayList;
 
-import main.constants.GameOfLifeConstants;
-import main.neighbourcounter.NeighbourCounter;
+import main.strategy.GameOfLifeStrategy;
 
 /**
  * Created by kelvin on 06/06/17.
  */
 public class GameOfLife {
 
-    public static ArrayList<ArrayList<String>> process(ArrayList<ArrayList<String>> list) {
+    private ArrayList<GameOfLifeStrategy> strategies;
+
+    public GameOfLife(ArrayList <GameOfLifeStrategy> strategies) {
+        this.strategies = strategies;
+    }
+
+    public ArrayList<ArrayList<String>> process(ArrayList<ArrayList<String>> list) {
 
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
         processCells(resultList, list);
@@ -18,20 +23,21 @@ public class GameOfLife {
         return resultList;
     }
 
-    private static void processCells(ArrayList<ArrayList<String>> tempList, ArrayList<ArrayList<String>> originalList) {
+    private void processCells(ArrayList<ArrayList<String>> tempList, ArrayList<ArrayList<String>> originalList) {
         for (int i = 0; i < originalList.size(); i++) {
             ArrayList<String> lineList = new ArrayList<>();
             for (int j = 0; j < originalList.get(i).size(); j++) {
-                if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) < 2)
-                    lineList.add(GameOfLifeConstants.DEAD_STR);
-                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
-                    lineList.add(GameOfLifeConstants.DEAD_STR);
-                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2
-                        || originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 3)
-                    lineList.add(GameOfLifeConstants.ALIVE_STR);
-                else lineList.add(GameOfLifeConstants.DEAD_STR);
+                String processedCell = processStrategiesForCell(i, j, originalList);
+                lineList.add(processedCell);
             }
             tempList.add(lineList);
         }
+    }
+
+    private String processStrategiesForCell(int iPos, int jPos, ArrayList<ArrayList<String>> originalList) {
+        String processedCell = "";
+        for (int x = 0; x < strategies.size(); x++)
+            processedCell = strategies.get(x).getNextGenerationForCell(originalList, iPos, jPos, processedCell);
+        return processedCell;
     }
 }

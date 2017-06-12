@@ -2,8 +2,13 @@ package test.GameOfLife;
 
 import main.GameOfLife;
 import main.constants.GameOfLifeConstants;
+import main.strategy.GameOfLifeStrategy;
+import main.strategy.impl.OvercrowdingStrategy;
+import main.strategy.impl.SurvivalStrategy;
+import main.strategy.impl.UnderpopulationStrategy;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +26,18 @@ public class GameOfLifeTests {
      */
 
     private ArrayList<ArrayList<String>> test2dArrayList;
+    private GameOfLife gameOfLife;
     private final String ALIVE_STR = GameOfLifeConstants.ALIVE_STR;
     private final String DEAD_STR = GameOfLifeConstants.DEAD_STR;
+
+    @Before
+    public void setUp() {
+        ArrayList<GameOfLifeStrategy> strategies = new ArrayList<>();
+        strategies.add(new UnderpopulationStrategy());
+        strategies.add(new OvercrowdingStrategy());
+        strategies.add(new SurvivalStrategy());
+        gameOfLife = new GameOfLife(strategies);
+    }
 
     //Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
     @Test
@@ -39,7 +54,7 @@ public class GameOfLifeTests {
         int yPos = 1;
 
         //when
-        ArrayList<ArrayList<String>> result = GameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
 
         //then
         Assert.assertEquals(DEAD_STR, result.get(xPos).get(yPos));
@@ -60,7 +75,7 @@ public class GameOfLifeTests {
 
 
         //when
-        ArrayList<ArrayList<String>> result = GameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
 
         //then
         Assert.assertEquals(DEAD_STR, result.get(xPos).get(yPos));
@@ -81,7 +96,7 @@ public class GameOfLifeTests {
 
 
         //when
-        ArrayList<ArrayList<String>> result = GameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
 
         //then
         Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
@@ -102,7 +117,7 @@ public class GameOfLifeTests {
 
 
         //when
-        ArrayList<ArrayList<String>> result = GameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
 
         //then
         Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
