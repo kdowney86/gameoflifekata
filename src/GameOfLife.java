@@ -21,7 +21,8 @@ public class GameOfLife {
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
                 else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
-                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2)
+                else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2
+                        || originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2)
                     tempList.get(i).set(j, GameOfLifeConstants.ALIVE_STR);
             }
         }
