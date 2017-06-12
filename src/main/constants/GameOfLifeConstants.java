@@ -1,3 +1,5 @@
+package main.constants;
+
 /**
  * Created by kelvin on 06/06/17.
  */

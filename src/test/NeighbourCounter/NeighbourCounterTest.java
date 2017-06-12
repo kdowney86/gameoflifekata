@@ -1,3 +1,6 @@
+package test.NeighbourCounter;
+
+import main.neighbourcounter.NeighbourCounter;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

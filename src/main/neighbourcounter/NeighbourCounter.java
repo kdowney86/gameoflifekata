@@ -1,3 +1,7 @@
+package main.neighbourcounter;
+
+import main.constants.GameOfLifeConstants;
+
 import java.util.ArrayList;
 
 /**

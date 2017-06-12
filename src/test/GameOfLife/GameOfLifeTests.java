@@ -1,3 +1,7 @@
+package test.GameOfLife;
+
+import main.GameOfLife;
+import main.constants.GameOfLifeConstants;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -93,7 +97,7 @@ public class GameOfLifeTests {
         test2dArrayList.add(0, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(1, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(2, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
-        test2dArrayList.add(3, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
+        test2dArrayList.add(3, new ArrayList<>(Arrays.asList(ALIVE_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
 

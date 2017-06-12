@@ -1,4 +1,9 @@
+package main;
+
 import java.util.ArrayList;
+
+import main.constants.GameOfLifeConstants;
+import main.neighbourcounter.NeighbourCounter;
 
 /**
  * Created by kelvin on 06/06/17.
@@ -22,7 +27,7 @@ public class GameOfLife {
                 else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) > 3)
                     tempList.get(i).set(j, GameOfLifeConstants.DEAD_STR);
                 else if (originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2
-                        || originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 2)
+                        || originalList.get(i).get(j).equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, i, j) == 3)
                     tempList.get(i).set(j, GameOfLifeConstants.ALIVE_STR);
             }
         }
