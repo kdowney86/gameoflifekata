@@ -4,6 +4,7 @@ import main.GameOfLife;
 import main.constants.GameOfLifeConstants;
 import main.strategy.GameOfLifeStrategy;
 import main.strategy.impl.OvercrowdingStrategy;
+import main.strategy.impl.ReproductionStrategy;
 import main.strategy.impl.SurvivalStrategy;
 import main.strategy.impl.UnderpopulationStrategy;
 import org.junit.Assert;
@@ -36,6 +37,7 @@ public class GameOfLifeTests {
         strategies.add(new UnderpopulationStrategy());
         strategies.add(new OvercrowdingStrategy());
         strategies.add(new SurvivalStrategy());
+        strategies.add(new ReproductionStrategy());
         gameOfLife = new GameOfLife(strategies);
     }
 
