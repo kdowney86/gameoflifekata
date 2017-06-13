@@ -7,24 +7,14 @@ import java.util.ArrayList;
  */
 public class GameBoard {
 
-    private int height;
-    private int width;
     private ArrayList<ArrayList<Cell>> cells;
 
     public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+        return cells.size();
     }
 
     public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
+        return cells.get(0).size();
     }
 
     public ArrayList<ArrayList<Cell>> getCells() {

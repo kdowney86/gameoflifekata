@@ -19,7 +19,6 @@ public class SurvivalStrategy implements GameOfLifeStrategy {
     }
 
     private String processCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell, String currentCell) {
-
         if (processedCell.equals("") && (currentCell.equals(GameOfLifeConstants.ALIVE_STR) && (NeighbourCounter.count(originalList, iPos, jPos) == 2
                 || NeighbourCounter.count(originalList, iPos, jPos) == 3)))
             processedCell = GameOfLifeConstants.ALIVE_STR;

@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+import main.constants.GameOfLifeConstants;
 import main.strategy.GameOfLifeStrategy;
 
 /**
@@ -28,6 +29,7 @@ public class GameOfLife {
             ArrayList<String> lineList = new ArrayList<>();
             for (int j = 0; j < originalList.get(i).size(); j++) {
                 String processedCell = processStrategiesForCell(i, j, originalList);
+                if (processedCell.equals("")) processedCell = GameOfLifeConstants.DEAD_STR;
                 lineList.add(processedCell);
             }
             tempList.add(lineList);
