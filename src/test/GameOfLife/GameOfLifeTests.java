@@ -65,14 +65,14 @@ public class GameOfLifeTests {
     public void testAnyLiveCellWithMoreThanThreeLiveNeighboursDies() {
         //given
         test2dArrayList = new ArrayList<>();
-        int xPos = 2;
-        int yPos = 1;
         test2dArrayList.add(0, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(1, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(2, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
         test2dArrayList.add(3, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
+        int xPos = 2;
+        int yPos = 1;
 
         //when
         ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
@@ -94,7 +94,6 @@ public class GameOfLifeTests {
         test2dArrayList.add(3, new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
-
         //when
         ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
 
@@ -115,6 +114,25 @@ public class GameOfLifeTests {
         test2dArrayList.add(3, new ArrayList<>(Arrays.asList(ALIVE_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
+        //when
+        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
+
+        //then
+        Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
+    }
+
+    //Any dead cell with exactly three live neighbours becomes a live cell.
+    @Test
+    public void testAnyDeadCellWithThreeLiveNeighboursBecomesLiveCell() {
+        //given
+        test2dArrayList = new ArrayList<>();
+        int xPos = 2;
+        int yPos = 1;
+        test2dArrayList.add(0, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(1, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(2, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, ALIVE_STR, DEAD_STR)));
+        test2dArrayList.add(3, new ArrayList<>(Arrays.asList(ALIVE_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
+        test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
         //when
         ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
