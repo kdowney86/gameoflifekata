@@ -5,32 +5,22 @@ package main.model;
  */
 public class Cell {
 
+    private boolean alive;
     private boolean processed;
-    private int rowNumber;
-    private int colNumber;
-    private String value;
 
-    public Cell(int rowNumber, int colNumber, String value) {
-        this.rowNumber = rowNumber;
-        this.colNumber = colNumber;
-        this.value = value;
-        this.processed = false;
+    public Cell(boolean alive) {
+        this.alive = alive;
     }
 
-    public int getRowNumber() {
-        return rowNumber;
+    public Cell() {
     }
 
-    public void setRowNumber(int rowNumber) {
-        this.rowNumber = rowNumber;
+    public boolean isAlive() {
+        return alive;
     }
 
-    public int getColNumber() {
-        return colNumber;
-    }
-
-    public void setColNumber(int colNumber) {
-        this.colNumber = colNumber;
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
     public boolean isProcessed() {
@@ -41,11 +31,4 @@ public class Cell {
         this.processed = processed;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }

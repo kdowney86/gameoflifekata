@@ -2,7 +2,9 @@ package main;
 
 import java.util.ArrayList;
 
-import main.constants.GameOfLifeConstants;
+import main.builder.GameBoardBuilder;
+import main.model.Cell;
+import main.model.GameBoard;
 import main.strategy.GameOfLifeStrategy;
 
 /**
@@ -16,30 +18,44 @@ public class GameOfLife {
         this.strategies = strategies;
     }
 
-    public ArrayList<ArrayList<String>> process(ArrayList<ArrayList<String>> list) {
+    public GameBoard process(ArrayList<ArrayList<String>> list) {
 
-        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
-        processCells(resultList, list);
+        GameBoard processedBoard = getGameBoard(list);
+        GameBoard nextGenBoard = generate(processedBoard);
 
-        return resultList;
+        return nextGenBoard;
     }
 
-    private void processCells(ArrayList<ArrayList<String>> tempList, ArrayList<ArrayList<String>> originalList) {
-        for (int i = 0; i < originalList.size(); i++) {
-            ArrayList<String> lineList = new ArrayList<>();
-            for (int j = 0; j < originalList.get(i).size(); j++) {
-                String processedCell = processStrategiesForCell(i, j, originalList);
-                if (processedCell.equals("")) processedCell = GameOfLifeConstants.DEAD_STR;
+    private GameBoard getGameBoard(ArrayList<ArrayList<String>> list) {
+        GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+
+        for (ArrayList<String> row: list) {
+            gameBoardBuilder = gameBoardBuilder.withRow(row);
+        }
+
+        return gameBoardBuilder.build();
+    }
+
+    private GameBoard generate(GameBoard gameBoard) {
+        GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
+
+        for (int rowNumber = 0; rowNumber < gameBoard.getHeight(); rowNumber++) {
+            ArrayList<Cell> lineList = new ArrayList<>();
+            for (int colNumber = 0; colNumber < gameBoard.getWidth(); colNumber++) {
+                Cell processedCell = processStrategiesForCell(rowNumber, colNumber, gameBoard);
                 lineList.add(processedCell);
             }
-            tempList.add(lineList);
+            gameBoardBuilder = gameBoardBuilder.withRowOfCells(lineList);
         }
+        return gameBoardBuilder.build();
     }
 
-    private String processStrategiesForCell(int iPos, int jPos, ArrayList<ArrayList<String>> originalList) {
-        String processedCell = "";
+    private Cell processStrategiesForCell(int rowNumber, int colNumber, GameBoard gameBoard) {
+        Cell processedCell = new Cell();
+        processedCell.setProcessed(false);
+
         for (int x = 0; x < strategies.size(); x++)
-            processedCell = strategies.get(x).getNextGenerationForCell(originalList, iPos, jPos, processedCell);
+            processedCell = strategies.get(x).getNextGenerationForCell(gameBoard, rowNumber, colNumber, processedCell);
         return processedCell;
     }
 }

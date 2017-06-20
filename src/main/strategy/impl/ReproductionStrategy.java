@@ -1,26 +1,28 @@
 package main.strategy.impl;
 
-import main.constants.GameOfLifeConstants;
+import main.model.Cell;
+import main.model.GameBoard;
 import main.neighbourcounter.NeighbourCounter;
 import main.strategy.GameOfLifeStrategy;
 
-import java.util.ArrayList;
 
 /**
  * Created by kelvin on 13/06/17.
  */
 public class ReproductionStrategy implements GameOfLifeStrategy {
+
     @Override
-    public String getNextGenerationForCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell) {
-        final String currentCell = originalList.get(iPos).get(jPos);
-        processedCell = processCell(originalList, iPos, jPos, processedCell, currentCell);
+    public Cell getNextGenerationForCell(GameBoard gameBoard, int rowNumber, int colNumber, Cell cell) {
 
-        return processedCell;
-    }
+        if (!cell.isProcessed()) {
+            Cell currentCell = gameBoard.getCell(rowNumber, colNumber);
+            final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
+            if (!currentCell.isAlive() && neighbourCount == 3) {
+                cell.setAlive(true);
+                cell.setProcessed(true);
+            }
+        }
 
-    private String processCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell, String currentCell) {
-        if (processedCell.equals("") && (currentCell.equals(GameOfLifeConstants.DEAD_STR) && (NeighbourCounter.count(originalList, iPos, jPos) == 3)))
-            processedCell = GameOfLifeConstants.ALIVE_STR;
-        return processedCell;
+        return cell;
     }
 }

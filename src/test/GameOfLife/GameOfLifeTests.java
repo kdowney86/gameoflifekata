@@ -2,6 +2,8 @@ package test.GameOfLife;
 
 import main.GameOfLife;
 import main.constants.GameOfLifeConstants;
+import main.model.Cell;
+import main.model.GameBoard;
 import main.strategy.GameOfLifeStrategy;
 import main.strategy.impl.OvercrowdingStrategy;
 import main.strategy.impl.ReproductionStrategy;
@@ -56,10 +58,12 @@ public class GameOfLifeTests {
         int yPos = 1;
 
         //when
-        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
+        GameBoard resultBoard = gameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList <Cell>> result = resultBoard.getCells();
+        resultBoard.print();
 
         //then
-        Assert.assertEquals(DEAD_STR, result.get(xPos).get(yPos));
+        Assert.assertEquals(false, result.get(xPos).get(yPos).isAlive());
     }
 
     //Any live cell with more than three live neighbours dies, as if by overcrowding.
@@ -77,10 +81,11 @@ public class GameOfLifeTests {
         int yPos = 1;
 
         //when
-        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
-
+        GameBoard resultBoard = gameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList <Cell>> result = resultBoard.getCells();
+        resultBoard.print();
         //then
-        Assert.assertEquals(DEAD_STR, result.get(xPos).get(yPos));
+        Assert.assertEquals(false, result.get(xPos).get(yPos).isAlive());
     }
 
     //Any live cell with two or three live neighbours lives on to the next generation.
@@ -97,10 +102,11 @@ public class GameOfLifeTests {
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
         //when
-        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
-
+        GameBoard resultBoard = gameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList <Cell>> result = resultBoard.getCells();
+        resultBoard.print();
         //then
-        Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
+        Assert.assertEquals(true, result.get(xPos).get(yPos).isAlive());
     }
 
     //Any live cell with two or three live neighbours lives on to the next generation.
@@ -117,10 +123,12 @@ public class GameOfLifeTests {
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
         //when
-        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
+        GameBoard resultBoard = gameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList <Cell>> result = resultBoard.getCells();
+        resultBoard.print();
 
         //then
-        Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
+        Assert.assertEquals(true, result.get(xPos).get(yPos).isAlive());
     }
 
     //Any dead cell with exactly three live neighbours becomes a live cell.
@@ -137,9 +145,10 @@ public class GameOfLifeTests {
         test2dArrayList.add(4, new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
 
         //when
-        ArrayList<ArrayList<String>> result = gameOfLife.process(test2dArrayList);
-
+        GameBoard resultBoard = gameOfLife.process(test2dArrayList);
+        ArrayList<ArrayList <Cell>> result = resultBoard.getCells();
+        resultBoard.print();
         //then
-        Assert.assertEquals(ALIVE_STR, result.get(xPos).get(yPos));
+        Assert.assertEquals(true, result.get(xPos).get(yPos).isAlive());
     }
 }

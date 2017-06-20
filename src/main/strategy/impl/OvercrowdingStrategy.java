@@ -1,10 +1,9 @@
 package main.strategy.impl;
 
-import main.constants.GameOfLifeConstants;
+import main.model.Cell;
+import main.model.GameBoard;
 import main.neighbourcounter.NeighbourCounter;
 import main.strategy.GameOfLifeStrategy;
-
-import java.util.ArrayList;
 
 /**
  * Created by kelvin on 12/06/17.
@@ -12,11 +11,17 @@ import java.util.ArrayList;
 public class OvercrowdingStrategy implements GameOfLifeStrategy {
 
     @Override
-    public String getNextGenerationForCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell) {
-        final String currentCell = originalList.get(iPos).get(jPos);
-        if (processedCell.equals("") && (currentCell.equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, iPos, jPos) < 2))
-            processedCell = GameOfLifeConstants.DEAD_STR;
+    public Cell getNextGenerationForCell(GameBoard gameBoard, int rowNumber, int colNumber, Cell cell) {
 
-        return processedCell;
+        if (!cell.isProcessed()) {
+            Cell currentCell = gameBoard.getCell(rowNumber, colNumber);
+            final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
+            if (currentCell.isAlive() && neighbourCount > 3) {
+                cell.setAlive(false);
+                cell.setProcessed(true);
+            }
+        }
+
+        return cell;
     }
 }

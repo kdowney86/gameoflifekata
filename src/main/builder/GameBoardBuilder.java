@@ -12,30 +12,29 @@ import java.util.ArrayList;
 public class GameBoardBuilder {
 
     private ArrayList<ArrayList<Cell>> cells = new ArrayList<>();
-    private int rowNumber = 0;
 
-    public GameBoardBuilder withRow(ArrayList<Integer> rowValues) {
+    public GameBoardBuilder withRow(ArrayList<String> rowValues) {
         ArrayList<Cell> row = new ArrayList<>();
-
-        int colNumber = 0;
-        processCellValues(rowValues, row, colNumber);
+        processCellValues(rowValues, row);
 
         return this;
     }
 
-    private void processCellValues(ArrayList<Integer> rowValues, ArrayList<Cell> row, int colNumber) {
-        for (Integer cellValue: rowValues) {
-            if (cellValue == 1) {
-                row.add(new Cell(rowNumber, colNumber, GameOfLifeConstants.ALIVE_STR));
+    public GameBoardBuilder withRowOfCells(ArrayList<Cell> rowCells) {
+        cells.add(rowCells);
 
-            } else {
-                row.add(new Cell(rowNumber, colNumber, GameOfLifeConstants.DEAD_STR));
-            }
-            colNumber++;
+        return this;
+    }
+
+    private void processCellValues(ArrayList<String> rowValues, ArrayList<Cell> row) {
+        for (String cellValue: rowValues) {
+            row.add(new Cell(isAlive(cellValue)));
         }
-        rowNumber++;
-
         cells.add(row);
+    }
+
+    private boolean isAlive(String cellValue) {
+        return cellValue.equals(GameOfLifeConstants.ALIVE_STR);
     }
 
     public GameBoard build() {

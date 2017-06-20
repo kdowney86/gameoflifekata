@@ -1,7 +1,7 @@
 package test.builder;
 
-import main.constants.GameOfLifeConstants;
 import main.builder.GameBoardBuilder;
+import main.model.Cell;
 import main.model.GameBoard;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ public class GameBoardBuilderTest {
     @Test
     public void test1x1BoardReturned() {
         //given
-        ArrayList<Integer> singleElementRow = new ArrayList<>();
-        singleElementRow.add(1);
+        ArrayList<String> singleElementRow = new ArrayList<>();
+        singleElementRow.add("*");
         final int height = 1;
         final int width = 1;
 
@@ -28,35 +28,35 @@ public class GameBoardBuilderTest {
         //then
         Assert.assertEquals(resultBoard.getHeight(), height);
         Assert.assertEquals(resultBoard.getWidth(), width);
-        Assert.assertEquals(resultBoard.getCellValue(0, 0), GameOfLifeConstants.ALIVE_STR);
+        Assert.assertEquals(resultBoard.getCell(0, 0).isAlive(), true);
     }
 
     @Test
     public void test2x5BoardReturned() {
         //given
-        ArrayList<Integer> row = new ArrayList<>();
-        row.add(1);
-        row.add(0);
+        ArrayList<Cell> row = new ArrayList<>();
+        row.add(new Cell(true));
+        row.add(new Cell(false));
 
 
         final int height = 5;
         final int width = 2;
 
         //when
-        GameBoard resultBoard = new GameBoardBuilder().withRow(row).withRow(row).withRow(row).withRow(row).withRow(row).build();
+        GameBoard resultBoard = new GameBoardBuilder().withRowOfCells(row).withRowOfCells(row).withRowOfCells(row).withRowOfCells(row).withRowOfCells(row).build();
 
         //then
         Assert.assertEquals(resultBoard.getHeight(), height);
         Assert.assertEquals(resultBoard.getWidth(), width);
-        Assert.assertEquals(resultBoard.getCellValue(0, 0), GameOfLifeConstants.ALIVE_STR);
-        Assert.assertEquals(resultBoard.getCellValue(0, 1), GameOfLifeConstants.DEAD_STR);
-        Assert.assertEquals(resultBoard.getCellValue(1, 0), GameOfLifeConstants.ALIVE_STR);
-        Assert.assertEquals(resultBoard.getCellValue(1, 1), GameOfLifeConstants.DEAD_STR);
-        Assert.assertEquals(resultBoard.getCellValue(2, 0), GameOfLifeConstants.ALIVE_STR);
-        Assert.assertEquals(resultBoard.getCellValue(2, 1), GameOfLifeConstants.DEAD_STR);
-        Assert.assertEquals(resultBoard.getCellValue(3, 0), GameOfLifeConstants.ALIVE_STR);
-        Assert.assertEquals(resultBoard.getCellValue(3, 1), GameOfLifeConstants.DEAD_STR);
-        Assert.assertEquals(resultBoard.getCellValue(4, 0), GameOfLifeConstants.ALIVE_STR);
-        Assert.assertEquals(resultBoard.getCellValue(4, 1), GameOfLifeConstants.DEAD_STR);
+        Assert.assertEquals(resultBoard.getCell(0, 0).isAlive(), true);
+        Assert.assertEquals(resultBoard.getCell(0, 1).isAlive(), false);
+        Assert.assertEquals(resultBoard.getCell(1, 0).isAlive(), true);
+        Assert.assertEquals(resultBoard.getCell(1, 1).isAlive(), false);
+        Assert.assertEquals(resultBoard.getCell(2, 0).isAlive(), true);
+        Assert.assertEquals(resultBoard.getCell(2, 1).isAlive(), false);
+        Assert.assertEquals(resultBoard.getCell(3, 0).isAlive(), true);
+        Assert.assertEquals(resultBoard.getCell(3, 1).isAlive(), false);
+        Assert.assertEquals(resultBoard.getCell(4, 0).isAlive(), true);
+        Assert.assertEquals(resultBoard.getCell(4, 1).isAlive(), false);
     }
 }

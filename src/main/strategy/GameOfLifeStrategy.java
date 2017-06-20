@@ -1,12 +1,13 @@
 package main.strategy;
 
-import java.util.ArrayList;
+import main.model.Cell;
+import main.model.GameBoard;
 
 /**
  * Created by kelvin on 12/06/17.
  */
 public interface GameOfLifeStrategy {
 
-    String getNextGenerationForCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell);
+    Cell getNextGenerationForCell(GameBoard gameBoard, int rowNumber, int colNumber, Cell cell);
 
 }

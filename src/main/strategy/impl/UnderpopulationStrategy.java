@@ -1,10 +1,9 @@
 package main.strategy.impl;
 
-import main.constants.GameOfLifeConstants;
+import main.model.Cell;
+import main.model.GameBoard;
 import main.neighbourcounter.NeighbourCounter;
 import main.strategy.GameOfLifeStrategy;
-
-import java.util.ArrayList;
 
 /**
  * Created by kelvin on 12/06/17.
@@ -12,11 +11,16 @@ import java.util.ArrayList;
 public class UnderpopulationStrategy implements GameOfLifeStrategy {
 
     @Override
-    public String getNextGenerationForCell(ArrayList<ArrayList<String>> originalList, int iPos, int jPos, String processedCell) {
-        final String currentCellValue = originalList.get(iPos).get(jPos);
-        if (currentCellValue.equals(GameOfLifeConstants.ALIVE_STR) && NeighbourCounter.count(originalList, iPos, jPos) > 3)
-            processedCell = GameOfLifeConstants.DEAD_STR;
+    public Cell getNextGenerationForCell(GameBoard gameBoard, int rowNumber, int colNumber, Cell cell) {
 
-        return processedCell;
+        if (!cell.isProcessed()) {
+            Cell currentCell = gameBoard.getCell(rowNumber, colNumber);
+            final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
+            if (currentCell.isAlive() && neighbourCount < 2) {
+                cell.setAlive(false);
+            }
+        }
+
+        return cell;
     }
 }
