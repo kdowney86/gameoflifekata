@@ -18,6 +18,7 @@ public class SurvivalStrategy implements GameOfLifeStrategy {
             final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
             if (currentCell.isAlive() && (neighbourCount == 3 || neighbourCount == 2)) {
                 cell.setAlive(true);
+                cell.setProcessed(true);
             }
         }
 

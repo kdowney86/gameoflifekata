@@ -18,6 +18,7 @@ public class UnderpopulationStrategy implements GameOfLifeStrategy {
             final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
             if (currentCell.isAlive() && neighbourCount < 2) {
                 cell.setAlive(false);
+                cell.setProcessed(true);
             }
         }
 

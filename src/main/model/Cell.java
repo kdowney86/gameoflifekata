@@ -10,6 +10,7 @@ public class Cell {
 
     public Cell(boolean alive) {
         this.alive = alive;
+        this.processed = false;
     }
 
     public Cell() {
