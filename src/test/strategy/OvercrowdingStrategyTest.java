@@ -16,6 +16,7 @@ import java.util.Arrays;
  * Created by kelvin on 20/06/17.
  */
 public class OvercrowdingStrategyTest {
+
     private final String DEAD_STR = GameOfLifeConstants.DEAD_STR;
     private final String ALIVE_STR = GameOfLifeConstants.ALIVE_STR;
 
@@ -46,7 +47,6 @@ public class OvercrowdingStrategyTest {
         cell = overcrowdingStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(false, cell.isProcessed());
         Assert.assertEquals(true, cell.isAlive());
     }
 
@@ -68,7 +68,6 @@ public class OvercrowdingStrategyTest {
         cell = overcrowdingStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
@@ -90,30 +89,8 @@ public class OvercrowdingStrategyTest {
         cell = overcrowdingStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
-    @Test
-    public void testAlreadyProcessedCellRemainsUnaffected() {
-        //given
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(ALIVE_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, ALIVE_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
-        gameBoard = gameBoardBuilder.build();
 
-        int rowNumber = 1;
-        int colNumber = 1;
-        Cell cell = gameBoard.getCell(rowNumber, colNumber);
-        cell.setProcessed(true);
-
-        //when
-        cell = overcrowdingStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
-
-        //then
-        Assert.assertEquals(true, cell.isProcessed());
-        Assert.assertEquals(true, cell.isAlive());
-    }
 }

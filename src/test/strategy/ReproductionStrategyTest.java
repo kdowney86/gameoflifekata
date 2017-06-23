@@ -46,7 +46,6 @@ public class ReproductionStrategyTest {
         cell = reproductionStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(true, cell.isAlive());
     }
 
@@ -68,7 +67,6 @@ public class ReproductionStrategyTest {
         cell = reproductionStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(false, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
@@ -90,7 +88,6 @@ public class ReproductionStrategyTest {
         cell = reproductionStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(false, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
@@ -112,30 +109,6 @@ public class ReproductionStrategyTest {
         cell = reproductionStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(false, cell.isProcessed());
         Assert.assertEquals(true, cell.isAlive());
-    }
-
-    @Test
-    public void testAlreadyProcessedCellUnaffected() {
-        //given
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, ALIVE_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(ALIVE_STR, ALIVE_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
-        gameBoard = gameBoardBuilder.build();
-
-        int rowNumber = 2;
-        int colNumber = 0;
-        Cell cell = gameBoard.getCell(rowNumber, colNumber);
-        cell.setProcessed(true);
-
-        //when
-        cell = reproductionStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
-
-        //then
-        Assert.assertEquals(true, cell.isProcessed());
-        Assert.assertEquals(false, cell.isAlive());
     }
 }

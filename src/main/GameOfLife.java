@@ -52,7 +52,6 @@ public class GameOfLife {
 
     private Cell processStrategiesForCell(int rowNumber, int colNumber, GameBoard gameBoard) {
         Cell processedCell = new Cell();
-        processedCell.setProcessed(false);
 
         for (int x = 0; x < strategies.size(); x++)
             processedCell = strategies.get(x).getNextGenerationForCell(gameBoard, rowNumber, colNumber, processedCell);
