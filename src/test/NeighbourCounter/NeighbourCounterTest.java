@@ -14,6 +14,7 @@ import java.util.Arrays;
 public class NeighbourCounterTest {
 
     private ArrayList<ArrayList<Cell>> test2dArrayList;
+    private NeighbourCounter neighbourCounter = new NeighbourCounter();
 
     @Test
     public void countNoNeighboursTest() {
@@ -28,7 +29,7 @@ public class NeighbourCounterTest {
         int expected = 0;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -47,7 +48,7 @@ public class NeighbourCounterTest {
         int expected = 1;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -66,7 +67,7 @@ public class NeighbourCounterTest {
         int expected = 1;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -85,7 +86,7 @@ public class NeighbourCounterTest {
         int expected = 1;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -104,7 +105,7 @@ public class NeighbourCounterTest {
         int expected = 1;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -123,7 +124,7 @@ public class NeighbourCounterTest {
         int expected = 2;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -142,7 +143,7 @@ public class NeighbourCounterTest {
         int expected = 3;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
@@ -161,7 +162,7 @@ public class NeighbourCounterTest {
         int expected = 4;
 
         //when
-        int result = NeighbourCounter.count(test2dArrayList, 2, 1);
+        int result = neighbourCounter.count(test2dArrayList, 2, 1);
 
         //then
         Assert.assertEquals(expected, result);
