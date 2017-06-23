@@ -1,7 +1,5 @@
 package main.model;
 
-import main.GameOfLife;
-import main.constants.GameOfLifeConstants;
 
 import java.util.ArrayList;
 
@@ -32,15 +30,4 @@ public class GameBoard {
         return cells.get(rowNumber).get(colNumber);
     }
 
-    public void print() {
-        String value;
-        for (ArrayList<Cell> row: cells) {
-            for (Cell cell: row) {
-                if (cell.isAlive()) value = GameOfLifeConstants.ALIVE_STR;
-                else value = GameOfLifeConstants.DEAD_STR;
-                System.out.print(value);
-            }
-            System.out.println();
-        }
-    }
 }
