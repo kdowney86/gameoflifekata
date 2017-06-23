@@ -10,6 +10,10 @@ public class GameBoard {
 
     private ArrayList<ArrayList<Cell>> cells;
 
+    public GameBoard(ArrayList<ArrayList<Cell>> cells) {
+        this.cells = cells;
+    }
+
     public int getHeight() {
         return cells.size();
     }
@@ -20,10 +24,6 @@ public class GameBoard {
 
     public ArrayList<ArrayList<Cell>> getCells() {
         return cells;
-    }
-
-    public void setCells(ArrayList<ArrayList<Cell>> cells) {
-        this.cells = cells;
     }
 
     public Cell getCell(int rowNumber, int colNumber) {
