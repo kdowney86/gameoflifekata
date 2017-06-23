@@ -38,8 +38,7 @@ public class GameBoardBuilder {
     }
 
     public GameBoard build() {
-        GameBoard resultBoard = new GameBoard();
-        resultBoard.setCells(cells);
+        GameBoard resultBoard = new GameBoard(this.cells);
         return resultBoard;
     }
 }
