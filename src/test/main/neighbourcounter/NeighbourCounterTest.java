@@ -1,4 +1,4 @@
-package test.NeighbourCounter;
+package test.main.neighbourcounter;
 
 import main.model.Cell;
 import main.neighbourcounter.NeighbourCounter;

@@ -1,4 +1,4 @@
-package test.builder;
+package test.main.builder;
 
 import main.builder.GameBoardBuilder;
 import main.model.Cell;
