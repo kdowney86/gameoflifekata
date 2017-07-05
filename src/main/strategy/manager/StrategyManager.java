@@ -1,5 +1,7 @@
 package main.strategy.manager;
 
+import main.model.Cell;
+import main.model.GameBoard;
 import main.strategy.GameOfLifeStrategy;
 
 import java.util.ArrayList;
@@ -20,7 +22,11 @@ public class StrategyManager {
         strategies.add(strategy);
     }
 
-    public List<GameOfLifeStrategy> getStrategies() {
-        return this.strategies;
+    public Cell processStrategiesForCell(int rowNumber, int colNumber, GameBoard gameBoard) {
+        Cell processedCell = gameBoard.getCell(rowNumber, colNumber);
+
+        for (int x = 0; x < strategies.size(); x++)
+            processedCell = strategies.get(x).getNextGenerationForCell(gameBoard, rowNumber, colNumber, processedCell);
+        return processedCell;
     }
 }
