@@ -21,20 +21,7 @@ public class GameOfLife {
     }
 
     public GameBoard process(GameBoard board) {
-
-        GameBoard nextGenBoard = generate(board);
-
-        return nextGenBoard;
-    }
-
-    private GameBoard getGameBoard(ArrayList<ArrayList<String>> list) {
-        GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
-
-        for (ArrayList<String> row: list) {
-            gameBoardBuilder = gameBoardBuilder.withRow(row);
-        }
-
-        return gameBoardBuilder.build();
+        return generate(board);
     }
 
     private GameBoard generate(GameBoard gameBoard) {
