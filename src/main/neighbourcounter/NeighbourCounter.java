@@ -9,111 +9,33 @@ import java.util.ArrayList;
  */
 public class NeighbourCounter {
 
+    private final int MIN_TEST_RANGE = -1;
+    private final int MAX_TEST_RANGE = 1;
+
     public int count(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
-
-        int result = 0;
-        result += getNeighboursToTheWest(list, rowNumber, colNumber);
-        result += getNeighboursToTheNorth(list, rowNumber, colNumber);
-        result += getNeighboursToTheEast(list, rowNumber, colNumber);
-        result += getNeighboursToTheSouth(list, rowNumber, colNumber);
-        result += getNeighboursToTheNorthWest(list, rowNumber, colNumber);
-        result += getNeighboursToTheNorthEast(list, rowNumber, colNumber);
-        result += getNeighboursToTheSouthWest(list, rowNumber, colNumber);
-        result += getNeighboursToTheSouthEast(list, rowNumber, colNumber);
-
-
-        return result;
+        return processNeighbouringCells(list, rowNumber, colNumber);
     }
 
-    private int getNeighboursToTheWest(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
+    private int processNeighbouringCells(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
         int result = 0;
-        int xDiff = -1;
-        int yDiff = 0;
 
-        if (checkIsInBounds(list, rowNumber, colNumber, xDiff, yDiff)){
-            result += getNeighbour(list, rowNumber, colNumber, xDiff, yDiff);
+        for (int rowToTest = MIN_TEST_RANGE; rowToTest <= MAX_TEST_RANGE; rowToTest++) {
+            for (int columnToTest = MIN_TEST_RANGE; columnToTest <= MAX_TEST_RANGE; columnToTest++) {
+                if (isValidNeighbour(list, rowNumber, colNumber, rowToTest, columnToTest)) {
+                    result += getNeighbourCount(list, rowNumber, colNumber, rowToTest, columnToTest);
+                }
+            }
         }
+        
         return result;
     }
 
-    private int getNeighboursToTheNorthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = -1;
-        int yDiff = -1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
+    private boolean isValidNeighbour(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber, int i, int j) {
+        boolean isDifferentCell= !(i == 0 && j == 0);
+        return  (isDifferentCell) && checkIsInBounds(list, rowNumber, colNumber, i, j);
     }
 
-    private int getNeighboursToTheNorth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = 0;
-        int yDiff = -1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighboursToTheNorthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = 1;
-        int yDiff = -1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighboursToTheEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = 1;
-        int yDiff = 0;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighboursToTheSouthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = -1;
-        int yDiff = 1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighboursToTheSouth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = 0;
-        int yDiff = 1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighboursToTheSouthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
-        int result = 0;
-        int xDiff = 1;
-        int yDiff = 1;
-
-        if (checkIsInBounds(list, xPos, yPos, xDiff, yDiff)){
-            result += getNeighbour(list, xPos, yPos, xDiff, yDiff);
-        }
-        return result;
-    }
-
-    private int getNeighbour(ArrayList<ArrayList<Cell>> list, int xPos, int yPos, int xDiff, int yDiff) {
+    private int getNeighbourCount(ArrayList<ArrayList<Cell>> list, int xPos, int yPos, int xDiff, int yDiff) {
         int neighbour = 0;
 
         if (list.get(xPos + xDiff).get(yPos + yDiff).isAlive()) neighbour++;
