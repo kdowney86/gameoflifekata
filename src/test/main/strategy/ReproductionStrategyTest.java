@@ -1,4 +1,4 @@
-package test.main.strategy.strategy;
+package main.strategy;
 
 import main.builder.GameBoardBuilder;
 import main.constants.GameOfLifeConstants;

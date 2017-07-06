@@ -1,12 +1,10 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import main.builder.GameBoardBuilder;
 import main.model.Cell;
 import main.model.GameBoard;
-import main.strategy.GameOfLifeStrategy;
 import main.strategy.manager.StrategyManager;
 
 /**
@@ -21,20 +19,7 @@ public class GameOfLife {
     }
 
     public GameBoard process(GameBoard board) {
-
-        GameBoard nextGenBoard = generate(board);
-
-        return nextGenBoard;
-    }
-
-    private GameBoard getGameBoard(ArrayList<ArrayList<String>> list) {
-        GameBoardBuilder gameBoardBuilder = new GameBoardBuilder();
-
-        for (ArrayList<String> row: list) {
-            gameBoardBuilder = gameBoardBuilder.withRow(row);
-        }
-
-        return gameBoardBuilder.build();
+        return generate(board);
     }
 
     private GameBoard generate(GameBoard gameBoard) {
@@ -43,20 +28,11 @@ public class GameOfLife {
         for (int rowNumber = 0; rowNumber < gameBoard.getHeight(); rowNumber++) {
             ArrayList<Cell> lineList = new ArrayList<>();
             for (int colNumber = 0; colNumber < gameBoard.getWidth(); colNumber++) {
-                Cell processedCell = processStrategiesForCell(rowNumber, colNumber, gameBoard);
+                Cell processedCell = strategyManager.processStrategiesForCell(rowNumber, colNumber, gameBoard);
                 lineList.add(processedCell);
             }
             gameBoardBuilder = gameBoardBuilder.withRowOfCells(lineList);
         }
         return gameBoardBuilder.build();
-    }
-
-    private Cell processStrategiesForCell(int rowNumber, int colNumber, GameBoard gameBoard) {
-        Cell processedCell = new Cell();
-        List<GameOfLifeStrategy> strategies = strategyManager.getStrategies();
-
-        for (int x = 0; x < strategies.size(); x++)
-            processedCell = strategies.get(x).getNextGenerationForCell(gameBoard, rowNumber, colNumber, processedCell);
-        return processedCell;
     }
 }

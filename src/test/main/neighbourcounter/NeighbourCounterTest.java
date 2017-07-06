@@ -1,7 +1,6 @@
-package test.main.neighbourcounter;
+package main.neighbourcounter;
 
 import main.model.Cell;
-import main.neighbourcounter.NeighbourCounter;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
