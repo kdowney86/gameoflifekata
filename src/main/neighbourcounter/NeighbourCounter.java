@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class NeighbourCounter {
 
-    public static int count(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
+    public int count(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
 
         int result = 0;
         result += getNeighboursToTheWest(list, rowNumber, colNumber);
@@ -25,7 +25,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheWest(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
+    private int getNeighboursToTheWest(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber) {
         int result = 0;
         int xDiff = -1;
         int yDiff = 0;
@@ -36,7 +36,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheNorthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheNorthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = -1;
         int yDiff = -1;
@@ -47,7 +47,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheNorth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheNorth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 0;
         int yDiff = -1;
@@ -58,7 +58,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheNorthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheNorthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 1;
         int yDiff = -1;
@@ -69,7 +69,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 1;
         int yDiff = 0;
@@ -80,7 +80,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheSouthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheSouthWest(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = -1;
         int yDiff = 1;
@@ -91,7 +91,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheSouth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheSouth(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 0;
         int yDiff = 1;
@@ -102,7 +102,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighboursToTheSouthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
+    private int getNeighboursToTheSouthEast(ArrayList<ArrayList<Cell>> list, int xPos, int yPos) {
         int result = 0;
         int xDiff = 1;
         int yDiff = 1;
@@ -113,7 +113,7 @@ public class NeighbourCounter {
         return result;
     }
 
-    private static int getNeighbour(ArrayList<ArrayList<Cell>> list, int xPos, int yPos, int xDiff, int yDiff) {
+    private int getNeighbour(ArrayList<ArrayList<Cell>> list, int xPos, int yPos, int xDiff, int yDiff) {
         int neighbour = 0;
 
         if (list.get(xPos + xDiff).get(yPos + yDiff).isAlive()) neighbour++;
@@ -121,7 +121,7 @@ public class NeighbourCounter {
         return neighbour;
     }
 
-    private static boolean checkIsInBounds(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber, int rowDiff, int colDiff) {
+    private boolean checkIsInBounds(ArrayList<ArrayList<Cell>> list, int rowNumber, int colNumber, int rowDiff, int colDiff) {
         boolean result = true;
 
         if (rowNumber + rowDiff < 0) result = false;

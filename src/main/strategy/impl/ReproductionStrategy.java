@@ -11,17 +11,21 @@ import main.strategy.GameOfLifeStrategy;
  */
 public class ReproductionStrategy implements GameOfLifeStrategy {
 
+    private NeighbourCounter neighbourCounter;
+
+    public ReproductionStrategy() {
+        neighbourCounter = new NeighbourCounter();
+    }
+
     @Override
     public Cell getNextGenerationForCell(GameBoard gameBoard, int rowNumber, int colNumber, Cell cell) {
 
-        if (!cell.isProcessed()) {
-            Cell currentCell = gameBoard.getCell(rowNumber, colNumber);
-            final int neighbourCount = NeighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
-            if (!currentCell.isAlive() && neighbourCount == 3) {
-                cell.setAlive(true);
-                cell.setProcessed(true);
-            }
+        Cell currentCell = gameBoard.getCell(rowNumber, colNumber);
+        final int neighbourCount = neighbourCounter.count(gameBoard.getCells(), rowNumber, colNumber);
+        if (!currentCell.isAlive() && neighbourCount == 3) {
+            cell.setAlive(true);
         }
+
 
         return cell;
     }

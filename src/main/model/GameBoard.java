@@ -1,7 +1,5 @@
 package main.model;
 
-import main.GameOfLife;
-import main.constants.GameOfLifeConstants;
 
 import java.util.ArrayList;
 
@@ -11,6 +9,10 @@ import java.util.ArrayList;
 public class GameBoard {
 
     private ArrayList<ArrayList<Cell>> cells;
+
+    public GameBoard(ArrayList<ArrayList<Cell>> cells) {
+        this.cells = cells;
+    }
 
     public int getHeight() {
         return cells.size();
@@ -24,23 +26,8 @@ public class GameBoard {
         return cells;
     }
 
-    public void setCells(ArrayList<ArrayList<Cell>> cells) {
-        this.cells = cells;
-    }
-
     public Cell getCell(int rowNumber, int colNumber) {
         return cells.get(rowNumber).get(colNumber);
     }
 
-    public void print() {
-        String value;
-        for (ArrayList<Cell> row: cells) {
-            for (Cell cell: row) {
-                if (cell.isAlive()) value = GameOfLifeConstants.ALIVE_STR;
-                else value = GameOfLifeConstants.DEAD_STR;
-                System.out.print(value);
-            }
-            System.out.println();
-        }
-    }
 }

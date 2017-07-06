@@ -1,4 +1,4 @@
-package test.strategy;
+package test.main.strategy.strategy;
 
 import main.builder.GameBoardBuilder;
 import main.constants.GameOfLifeConstants;
@@ -46,7 +46,6 @@ public class UnderpopulationStrategyTest {
         cell = underpopulationStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
@@ -68,7 +67,6 @@ public class UnderpopulationStrategyTest {
         cell = underpopulationStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(false, cell.isAlive());
     }
 
@@ -90,30 +88,6 @@ public class UnderpopulationStrategyTest {
         cell = underpopulationStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
 
         //then
-        Assert.assertEquals(false, cell.isProcessed());
-        Assert.assertEquals(true, cell.isAlive());
-    }
-
-    @Test
-    public void testProcessedCellsAreUnaffected() {
-        //given
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, ALIVE_STR, ALIVE_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
-        gameBoardBuilder = gameBoardBuilder.withRow(new ArrayList<>(Arrays.asList(DEAD_STR, DEAD_STR, DEAD_STR, DEAD_STR)));
-        gameBoard = gameBoardBuilder.build();
-
-        int rowNumber = 2;
-        int colNumber = 1;
-        Cell cell = gameBoard.getCell(rowNumber, colNumber);
-        cell.setProcessed(true);
-
-        //when
-        cell = underpopulationStrategy.getNextGenerationForCell(gameBoard, rowNumber, colNumber, cell);
-
-        //then
-        Assert.assertEquals(true, cell.isProcessed());
         Assert.assertEquals(true, cell.isAlive());
     }
 }

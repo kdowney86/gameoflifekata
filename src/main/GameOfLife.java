@@ -1,27 +1,28 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import main.builder.GameBoardBuilder;
 import main.model.Cell;
 import main.model.GameBoard;
 import main.strategy.GameOfLifeStrategy;
+import main.strategy.manager.StrategyManager;
 
 /**
  * Created by kelvin on 06/06/17.
  */
 public class GameOfLife {
 
-    private ArrayList<GameOfLifeStrategy> strategies;
+    private StrategyManager strategyManager;
 
-    public GameOfLife(ArrayList <GameOfLifeStrategy> strategies) {
-        this.strategies = strategies;
+    public GameOfLife(StrategyManager strategyManager) {
+        this.strategyManager = strategyManager;
     }
 
-    public GameBoard process(ArrayList<ArrayList<String>> list) {
+    public GameBoard process(GameBoard board) {
 
-        GameBoard processedBoard = getGameBoard(list);
-        GameBoard nextGenBoard = generate(processedBoard);
+        GameBoard nextGenBoard = generate(board);
 
         return nextGenBoard;
     }
@@ -52,7 +53,7 @@ public class GameOfLife {
 
     private Cell processStrategiesForCell(int rowNumber, int colNumber, GameBoard gameBoard) {
         Cell processedCell = new Cell();
-        processedCell.setProcessed(false);
+        List<GameOfLifeStrategy> strategies = strategyManager.getStrategies();
 
         for (int x = 0; x < strategies.size(); x++)
             processedCell = strategies.get(x).getNextGenerationForCell(gameBoard, rowNumber, colNumber, processedCell);
